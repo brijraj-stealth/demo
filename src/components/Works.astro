@@ -1,0 +1,362 @@
+---
+const projects = [
+  { src: '/asset 3.avif',  name: 'VILLA AURELIA',    size: 'md' },
+  { src: '/asset 4.avif',  name: 'MERIDIAN RETREAT',  size: 'lg' },
+  { src: '/asset 5.avif',  name: 'CASA LUMINA',       size: 'sm' },
+  { src: '/asset 7.avif',  name: 'THE SERAI HOUSE',   size: 'xl' },
+  { src: '/asset 8.avif',  name: 'TERRACE PAVILION',  size: 'sm' },
+  { src: '/asset 9.avif',  name: 'KALA RESIDENCE',    size: 'md' },
+  { src: '/asset 10.avif', name: 'STUDIO VALE',       size: 'lg' },
+  { src: '/asset 12.avif', name: 'GROVE HOUSE',       size: 'sm' },
+  { src: '/asset 13.avif', name: 'ALTA VILLA',        size: 'xl' },
+  { src: '/asset 15.avif', name: 'PINE LODGE',        size: 'md' },
+  { src: '/asset 17.avif', name: 'REVA COURT',        size: 'lg' },
+  { src: '/asset 18.avif', name: 'SOLEIL MANOR',      size: 'sm' },
+  { src: '/asset 19.avif', name: 'DUSK PAVILION',     size: 'md' },
+  { src: '/asset 21.avif', name: 'HAVEN ESTATE',      size: 'lg' },
+];
+
+const sizeMap = {
+  sm: { w: 190, h: 240 },
+  md: { w: 240, h: 320 },
+  lg: { w: 290, h: 400 },
+  xl: { w: 350, h: 480 },
+} as const;
+---
+
+<section class="works-section" aria-labelledby="works-heading">
+  <div class="marquee-outer" id="marqueeOuter" role="region" aria-label="Project showcase carousel">
+    <div class="marquee-track" id="marqueeTrack">
+      {[...projects, ...projects].map((p, i) => {
+        const { w, h } = sizeMap[p.size];
+        return (
+          <article class="project-item" style={`width:${w}px`}>
+            <div class="project-img-wrap" style={`height:${h}px`}>
+              <img src={p.src} alt={p.name} loading="lazy" draggable="false" />
+            </div>
+            <h3 class="project-name">{p.name}</h3>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+
+  <footer class="works-footer">
+    <h2 id="works-heading" class="works-heading">WORKS</h2>
+    <nav class="works-links" aria-label="Works navigation">
+      <a href="#" class="works-link" aria-label="View in progress projects">
+        IN PROGRESS
+        <svg xmlns="http://www.w3.org/2000/svg" height="13px" viewBox="0 -960 960 960" width="13px" fill="currentColor" aria-hidden="true">
+          <path d="m256-240-56-56 384-384H240v-80h480v480h-80v-344L256-240Z"/>
+        </svg>
+      </a>
+      <a href="#" class="works-link" aria-label="View archived projects">
+        ARCHIVE
+        <svg xmlns="http://www.w3.org/2000/svg" height="13px" viewBox="0 -960 960 960" width="13px" fill="currentColor" aria-hidden="true">
+          <path d="m256-240-56-56 384-384H240v-80h480v480h-80v-344L256-240Z"/>
+        </svg>
+      </a>
+    </nav>
+  </footer>
+</section>
+
+<style>
+  :root {
+    --text-color: #1a1714;
+    --bg-color: #ffffff;
+    --transition-easing: cubic-bezier(0.22, 1, 0.36, 1);
+    --transition-fast: 0.35s var(--transition-easing);
+    --transition-slow: 0.7s var(--transition-easing);
+  }
+
+  .works-section {
+    background: var(--bg-color);
+    height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    padding: 72px 0 52px;
+    contain: layout style paint;
+  }
+
+  /* ── Marquee ── */
+  .marquee-outer {
+    overflow: hidden;
+    cursor: grab;
+    user-select: none;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    contain: layout style;
+  }
+
+  .marquee-outer.grabbing {
+    cursor: grabbing;
+  }
+
+  .marquee-track {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    width: max-content;
+    padding: 0 60px;
+    will-change: transform;
+    contain: layout style;
+  }
+
+  /* ── Cards ── */
+  .project-item {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .project-img-wrap {
+    width: 100%;
+    overflow: hidden;
+    background: #e2dbd2;
+    border-radius: 2px;
+  }
+
+  .project-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+    transition: transform var(--transition-slow);
+  }
+
+  .project-item:hover .project-img-wrap img {
+    transform: scale(1.05);
+  }
+
+  .project-name {
+    font-family: 'Geist', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: var(--text-color);
+    text-transform: uppercase;
+  }
+
+  /* ── Footer ── */
+  .works-footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 36px 60px 0;
+  }
+
+  .works-heading {
+    font-family: 'Geist', sans-serif;
+    font-weight: 700;
+    font-size: clamp(64px, 9vw, 130px);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--text-color);
+  }
+
+  .works-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    padding-bottom: 10px;
+  }
+
+  .works-link {
+    font-family: 'Geist', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: var(--text-color);
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    position: relative;
+    padding-bottom: 2px;
+    transition: color var(--transition-fast);
+  }
+
+  .works-link svg {
+    transition: transform var(--transition-fast);
+  }
+
+  .works-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--text-color);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.38s var(--transition-easing);
+  }
+
+  .works-link:hover::after {
+    transform: scaleX(1);
+  }
+
+  .works-link:hover svg {
+    transform: translate(2px, -2px);
+  }
+</style>
+
+<script>
+  class MarqueeController {
+    constructor() {
+      this.outer = document.getElementById('marqueeOuter');
+      this.track = document.getElementById('marqueeTrack');
+
+      if (!this.outer || !this.track) return;
+
+      // Physics constants
+      this.AUTO = 0.45;
+      this.FRICTION = 0.92;
+      this.THROW_MUL = 0.55;
+      this.MAX_VEL = 22;
+
+      // State
+      this.x = 0;
+      this.velocity = this.AUTO;
+      this.isDown = false;
+      this.lastX = 0;
+      this.lastDelta = 0;
+      this.animationId = null;
+      this.isDestroyed = false;
+
+      this.init();
+    }
+
+    init() {
+      this.bindEvents();
+      this.startAnimation();
+    }
+
+    half() {
+      return this.track.scrollWidth / 2;
+    }
+
+    wrap() {
+      const h = this.half();
+      if (this.x <= -h) this.x += h;
+      if (this.x > 0) this.x -= h;
+    }
+
+    tick = () => {
+      if (this.isDestroyed) return;
+
+      if (!this.isDown) {
+        if (Math.abs(this.velocity) > this.AUTO * 1.05) {
+          this.velocity *= this.FRICTION;
+          if (Math.abs(this.velocity) < this.AUTO) {
+            this.velocity = Math.sign(this.velocity) * this.AUTO;
+          }
+        } else {
+          this.velocity += (this.AUTO - this.velocity) * 0.04;
+        }
+        this.x -= this.velocity;
+        this.wrap();
+        this.track.style.transform = `translateX(${this.x}px)`;
+      }
+
+      this.animationId = requestAnimationFrame(this.tick);
+    }
+
+    startAnimation() {
+      if (!this.animationId) {
+        this.animationId = requestAnimationFrame(this.tick);
+      }
+    }
+
+    stopAnimation() {
+      if (this.animationId) {
+        cancelAnimationFrame(this.animationId);
+        this.animationId = null;
+      }
+    }
+
+    bindEvents() {
+      this.handlePointerDown = this.handlePointerDown.bind(this);
+      this.handlePointerMove = this.handlePointerMove.bind(this);
+      this.handlePointerUp = this.handlePointerUp.bind(this);
+      this.handlePointerCancel = this.handlePointerCancel.bind(this);
+      this.handleDragStart = this.handleDragStart.bind(this);
+
+      this.outer.addEventListener('pointerdown', this.handlePointerDown, { passive: false });
+      this.outer.addEventListener('pointermove', this.handlePointerMove, { passive: true });
+      this.outer.addEventListener('pointerup', this.handlePointerUp, { passive: true });
+      this.outer.addEventListener('pointercancel', this.handlePointerCancel, { passive: true });
+      this.outer.addEventListener('dragstart', this.handleDragStart);
+    }
+
+    handlePointerDown(e) {
+      this.outer.setPointerCapture(e.pointerId);
+      this.isDown = true;
+      this.lastX = e.clientX;
+      this.lastDelta = 0;
+      this.velocity = 0;
+      this.outer.classList.add('grabbing');
+      e.preventDefault();
+    }
+
+    handlePointerMove(e) {
+      if (!this.isDown) return;
+      this.lastDelta = e.clientX - this.lastX;
+      this.x += this.lastDelta;
+      this.lastX = e.clientX;
+      this.wrap();
+      this.track.style.transform = `translateX(${this.x}px)`;
+    }
+
+    handlePointerUp = () => {
+      this.release();
+    }
+
+    handlePointerCancel = () => {
+      this.release();
+    }
+
+    release() {
+      if (!this.isDown) return;
+      this.isDown = false;
+      this.outer.classList.remove('grabbing');
+      this.velocity = -this.lastDelta * this.THROW_MUL;
+      this.velocity = Math.max(-this.MAX_VEL, Math.min(this.MAX_VEL, this.velocity));
+      if (Math.abs(this.velocity) < this.AUTO * 0.5) {
+        this.velocity = this.AUTO;
+      }
+    }
+
+    handleDragStart(e) {
+      e.preventDefault();
+    }
+
+    destroy() {
+      this.isDestroyed = true;
+      this.stopAnimation();
+
+      if (this.outer) {
+        this.outer.removeEventListener('pointerdown', this.handlePointerDown);
+        this.outer.removeEventListener('pointermove', this.handlePointerMove);
+        this.outer.removeEventListener('pointerup', this.handlePointerUp);
+        this.outer.removeEventListener('pointercancel', this.handlePointerCancel);
+        this.outer.removeEventListener('dragstart', this.handleDragStart);
+      }
+    }
+  }
+
+  // Initialize marquee when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => new MarqueeController());
+  } else {
+    new MarqueeController();
+  }
+</script>

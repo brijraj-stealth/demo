@@ -1,0 +1,306 @@
+---
+import Navbar from './Navbar.astro';
+
+const slides = [
+  '/asset 3.avif',
+  '/asset 4.avif',
+  '/asset 5.avif',
+  '/asset 7.avif',
+  '/asset 8.avif',
+  '/asset 9.avif',
+  '/asset 10.avif',
+  '/asset 12.avif',
+  '/asset 13.avif',
+  '/asset 15.avif',
+  '/asset 17.avif',
+  '/asset 18.avif',
+  '/asset 19.avif',
+  '/asset 21.avif',
+];
+---
+
+<!-- ════ LOADER ════ -->
+<div class="loader" id="loader">
+  <div class="loader-inner">
+    <span class="loader-logo">OURA & CO.</span>
+    <div class="loader-track">
+      <div class="loader-fill" id="loaderFill"></div>
+    </div>
+    <span class="loader-label">Crafting your space</span>
+  </div>
+</div>
+
+<!-- ════ HERO ════ -->
+<section class="hero" id="hero">
+  <Navbar />
+
+  <div class="slider" id="slider">
+    {slides.map((src, i) => (
+      <div class="slide" data-index={i} style={`background-image:url('${src}')`}></div>
+    ))}
+  </div>
+
+  <div class="overlay"></div>
+
+  <div class="hero-content">
+    <p class="eyebrow">Whatever you feel</p>
+    <h1 class="title">
+      WE DESIGN<br/>
+      THE FEELING<br/>
+      OF YOU
+    </h1>
+  </div>
+
+  <div class="scroll-hint">( SCROLL DOWN )</div>
+
+</section>
+
+<style>
+/* ─────────────────────────────────
+   LOADER
+───────────────────────────────── */
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: #0c0a08;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1),
+              visibility 0s linear 1s;
+}
+
+.loader.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.loader-logo {
+  font-family: 'Geist', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: 0.22em;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(12px);
+  animation: riseIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+}
+
+.loader-track {
+  width: 160px;
+  height: 1px;
+  background: rgba(255,255,255,0.1);
+  overflow: hidden;
+  opacity: 0;
+  animation: riseIn 0.6s ease 0.8s forwards;
+}
+
+.loader-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, rgba(255,255,255,0.4) 0%, #fff 100%);
+  animation: fillBar 1.8s cubic-bezier(0.4, 0, 0.15, 1) 1s forwards;
+}
+
+.loader-label {
+  font-family: 'Geist', sans-serif;
+  font-weight: 300;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  opacity: 0;
+  animation: riseIn 0.6s ease 1s forwards;
+}
+
+@keyframes fillBar {
+  0%   { width: 0%; }
+  100% { width: 100%; }
+}
+
+@keyframes riseIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ─────────────────────────────────
+   HERO
+───────────────────────────────── */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.5s ease 0.1s;
+}
+
+.hero.visible { opacity: 1; }
+
+/* ── Slider ── */
+.slider {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  clip-path: inset(0 100% 0 0);
+  z-index: 0;
+  will-change: clip-path, transform;
+}
+
+.slide.is-active {
+  clip-path: inset(0 0% 0 0);
+  z-index: 2;
+}
+
+.slide.is-prev {
+  clip-path: inset(0 0 0 100%);
+  z-index: 1;
+}
+
+/* ── Overlay ── */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background:
+    linear-gradient(to right,  rgba(6,4,2,0.62) 0%, transparent 55%),
+    linear-gradient(to top,    rgba(6,4,2,0.55) 0%, transparent 50%),
+    linear-gradient(to bottom, rgba(6,4,2,0.35) 0%, transparent 30%);
+  pointer-events: none;
+}
+
+/* ── Headline ── */
+.hero-content {
+  position: absolute;
+  bottom: 36px;
+  left: 44px;
+  z-index: 10;
+  opacity: 0;
+  animation: riseIn 1s cubic-bezier(0.22, 1, 0.36, 1) 3.2s forwards;
+}
+
+.eyebrow {
+  font-family: 'Geist', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.65);
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.title {
+  font-family: 'Geist', sans-serif;
+  font-weight: 700;
+  font-size: clamp(58px, 7.8vw, 110px);
+  line-height: 0.94;
+  color: #fff;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+/* ── Scroll hint ── */
+.scroll-hint {
+  position: absolute;
+  bottom: 36px;
+  right: 44px;
+  z-index: 10;
+  font-family: 'Geist', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  color: rgba(255,255,255,0.45);
+  text-transform: uppercase;
+  opacity: 0;
+  animation: riseIn 0.7s ease 3.7s forwards;
+}
+
+</style>
+
+<script>
+  const DURATION     = 1600;
+  const EASE         = 'cubic-bezier(0.76, 0, 0.24, 1)';
+  const AUTO_DELAY   = 7000;
+
+  const slideEls = Array.from(document.querySelectorAll<HTMLElement>('.slide'));
+  const loader   = document.getElementById('loader')!;
+  const hero     = document.getElementById('hero')!;
+
+  let current   = 0;
+  let animating = false;
+  let autoTimer: ReturnType<typeof setInterval>;
+
+  /* init: show first slide, hide rest */
+  slideEls.forEach((s, i) => {
+    s.style.transition = 'none';
+    s.style.clipPath   = i === 0 ? 'inset(0 0% 0 0)' : 'inset(0 100% 0 0)';
+    s.style.zIndex     = i === 0 ? '1' : '0';
+  });
+
+  function goTo(next: number) {
+    if (animating || next === current) return;
+    animating = true;
+
+    const outEl = slideEls[current];
+    const inEl  = slideEls[next];
+
+    /* outgoing stays fully visible underneath — no gap possible */
+    outEl.style.transition = 'none';
+    outEl.style.clipPath   = 'inset(0 0% 0 0)';
+    outEl.style.zIndex     = '1';
+
+    /* incoming starts hidden, on top */
+    inEl.style.transition  = 'none';
+    inEl.style.clipPath    = 'inset(0 100% 0 0)';
+    inEl.style.zIndex      = '2';
+
+    inEl.getBoundingClientRect(); // force reflow
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        inEl.style.transition = `clip-path ${DURATION}ms ${EASE}`;
+        inEl.style.clipPath   = 'inset(0 0% 0 0)';
+
+        current = next;
+
+        setTimeout(() => {
+          outEl.style.transition = 'none';
+          outEl.style.clipPath   = 'inset(0 100% 0 0)';
+          outEl.style.zIndex     = '0';
+          inEl.style.zIndex      = '1';
+          animating = false;
+        }, DURATION + 60);
+      });
+    });
+  }
+
+  function startAuto() {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(() => goTo((current + 1) % slideEls.length), AUTO_DELAY);
+  }
+
+  /* loader fades out, hero fades in */
+  setTimeout(() => {
+    hero.classList.add('visible');
+    loader.classList.add('fade-out');
+  }, 2900);
+
+  setTimeout(() => startAuto(), 3800);
+</script>
