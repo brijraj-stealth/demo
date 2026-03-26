@@ -139,10 +139,7 @@ const slides = [
 .hero {
   position: relative;
   width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  opacity: 0;
-  transition: opacity 0.5s ease 0.1s;
+  height: 100svh;
 }
 
 .hero.visible { opacity: 1; }
@@ -217,93 +214,109 @@ const slides = [
 }
 
 /* ── Scroll hint ── */
+.scroll-hint {
+  position: absolute;
+  bottom: 36px;
+  right: 44px;
+  z-index: 10;
+  font-family: 'Geist', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  color: rgba(255,255,255,0.45);
+  text-transform: uppercase;
+  opacity: 0;
+  animation: riseIn 0.7s ease 3.7s forwards;
+}
+
 /* ── Responsive Design ── */
-  @media (max-width: 768px) {
-    .loader-inner {
-      gap: 16px;
-    }
-
-    .loader-logo {
-      font-size: 14px;
-    }
-
-    .loader-track {
-      width: 120px;
-    }
-
-    .loader-label {
-      font-size: 8px;
-    }
-
-    .hero {
-      height: 100vh;
-    }
-
-    .hero-content {
-      bottom: 24px;
-      left: 24px;
-      right: 24px;
-    }
-
-    .eyebrow {
-      font-size: 10px;
-      margin-bottom: 8px;
-    }
-
-    .title {
-      font-size: clamp(48px, 12vw, 80px);
-      line-height: 0.9;
-    }
-
-    .scroll-hint {
-      bottom: 24px;
-      right: 24px;
-      font-size: 8px;
-    }
+@media (max-width: 768px) {
+  .loader-inner {
+    gap: 16px;
   }
 
-  @media (max-width: 480px) {
-    .loader-inner {
-      gap: 12px;
-    }
-
-    .loader-logo {
-      font-size: 12px;
-    }
-
-    .loader-track {
-      width: 100px;
-    }
-
-    .loader-fill {
-      animation-duration: 1.4s;
-    }
-
-    .loader-label {
-      font-size: 7px;
-    }
-
-    .hero-content {
-      bottom: 20px;
-      left: 20px;
-      right: 20px;
-    }
-
-    .eyebrow {
-      font-size: 9px;
-      margin-bottom: 6px;
-    }
-
-    .title {
-      font-size: clamp(36px, 14vw, 60px);
-    }
-
-    .scroll-hint {
-      bottom: 20px;
-      right: 20px;
-      font-size: 7px;
-    }
+  .loader-logo {
+    font-size: 14px;
   }
+
+  .loader-track {
+    width: 120px;
+  }
+
+  .loader-label {
+    font-size: 8px;
+  }
+
+  .hero {
+    height: 100vh;
+  }
+
+  .hero-content {
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+  }
+
+  .eyebrow {
+    font-size: 10px;
+    margin-bottom: 8px;
+  }
+
+  .title {
+    font-size: clamp(48px, 12vw, 80px);
+    line-height: 0.9;
+  }
+
+  .scroll-hint {
+    bottom: 24px;
+    right: 24px;
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .loader-inner {
+    gap: 12px;
+  }
+
+  .loader-logo {
+    font-size: 12px;
+  }
+
+  .loader-track {
+    width: 100px;
+  }
+
+  .loader-fill {
+    animation-duration: 1.4s;
+  }
+
+  .loader-label {
+    font-size: 7px;
+  }
+
+  .hero-content {
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+  }
+
+  .eyebrow {
+    font-size: 9px;
+    margin-bottom: 6px;
+  }
+
+  .title {
+    font-size: clamp(36px, 14vw, 60px);
+  }
+
+  .scroll-hint {
+    bottom: 20px;
+    right: 20px;
+    font-size: 7px;
+  }
+}
+</style>
 
 <script>
   const DURATION     = 1600;

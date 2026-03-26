@@ -53,3 +53,4 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 >>>>>>> 9680d59 ("Initial commit from Astro")
+.vercel
