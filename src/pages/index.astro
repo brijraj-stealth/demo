@@ -25,4 +25,13 @@ import Works from '../components/Works.astro';
     position: relative;
     z-index: 1;
   }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .sticky-hero {
+      position: relative;
+      height: auto;
+      min-height: 100vh;
+    }
+  }
 </style>
