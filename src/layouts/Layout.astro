@@ -112,24 +112,20 @@ import '@fontsource/geist/700.css';
 	}
 </style>
 
-<script is:inline>
-			import Lenis from 'lenis';
+<script>
+	import Lenis from 'lenis';
 
-			const lenis = new Lenis({
-				smoothWheel: true,
-				smoothTouch: false,
-				touchMultiplier: 2,
-				infinite: false,
-				normalizeWheel: true,
-			});
+	const lenis = new Lenis({
+		smoothWheel: true,
+		smoothTouch: false,
+		touchMultiplier: 2,
+		infinite: false,
+	});
 
-			// Add lenis class to html element
-			document.documentElement.classList.add('lenis');
+	function raf(time: number) {
+		lenis.raf(time);
+		requestAnimationFrame(raf);
+	}
 
-			function raf(time) {
-				lenis.raf(time);
-				requestAnimationFrame(raf);
-			}
-
-			requestAnimationFrame(raf);
-		</script>
+	requestAnimationFrame(raf);
+</script>
