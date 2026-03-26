@@ -1,40 +1,16 @@
-<<<<<<< HEAD
-# demo
-demo for client
-=======
-# Astro Starter Kit: Basics
+# Oura & Co. Portfolio
 
-```sh
-npm create astro@latest -- --template basics
-```
+A modern portfolio website built with Astro featuring smooth scrolling animations and responsive design.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 🚀 Features
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
-
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+- Lenis smooth scrolling
+- Responsive design with fluid typography
+- Interactive image slideshow
+- Physics-based marquee animation
+- Mobile-optimized navigation
 
 ## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
 
 | Command                   | Action                                           |
 | :------------------------ | :----------------------------------------------- |
@@ -42,10 +18,22 @@ All commands are run from the root of the project, from a terminal:
 | `npm run dev`             | Starts local dev server at `localhost:4321`      |
 | `npm run build`           | Build your production site to `./dist/`          |
 | `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-## 👀 Want to learn more?
+## 📁 Project Structure
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+```
+/
+├── public/
+│   └── assets/ (image files)
+├── src/
+│   ├── components/
+│   │   ├── Hero.astro
+│   │   ├── Navbar.astro
+│   │   └── Works.astro
+│   ├── layouts/
+│   │   └── Layout.astro
+│   └── pages/
+│       └── index.astro
+└── package.json
+```
 >>>>>>> 9680d59 ("Initial commit from Astro")

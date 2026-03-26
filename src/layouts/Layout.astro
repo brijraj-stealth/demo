@@ -42,7 +42,6 @@ import '@fontsource/geist/700.css';
 		padding: 0;
 	}
 	html {
-		scroll-behavior: smooth;
 		font-size: 16px;
 		line-height: 1.5;
 	}
@@ -116,11 +115,16 @@ import '@fontsource/geist/700.css';
 <script is:inline>
 			import Lenis from 'lenis';
 
-			const lenis = new Lenis();
-
-			lenis.on('scroll', (e) => {
-				console.log(e);
+			const lenis = new Lenis({
+				smoothWheel: true,
+				smoothTouch: false,
+				touchMultiplier: 2,
+				infinite: false,
+				normalizeWheel: true,
 			});
+
+			// Add lenis class to html element
+			document.documentElement.classList.add('lenis');
 
 			function raf(time) {
 				lenis.raf(time);

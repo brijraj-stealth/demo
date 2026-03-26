@@ -5,33 +5,10 @@ import Works from '../components/Works.astro';
 ---
 
 <Layout>
-  <div class="sticky-hero">
-    <Hero />
-  </div>
-  <div class="scroll-content">
-    <Works />
-  </div>
+  <Hero />
+  <Works />
 </Layout>
 
 <style>
-  .sticky-hero {
-    position: sticky;
-    top: 0;
-    height: 100svh;
-    z-index: 0;
-  }
-
-  .scroll-content {
-    position: relative;
-    z-index: 1;
-  }
-
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .sticky-hero {
-      position: relative;
-      height: auto;
-      min-height: 100vh;
-    }
-  }
+  /* No additional styles needed - let Lenis handle smooth scrolling */
 </style>
