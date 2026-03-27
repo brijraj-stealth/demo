@@ -9,7 +9,7 @@ import '@fontsource/geist/700.css';
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
@@ -21,95 +21,281 @@ import '@fontsource/geist/700.css';
 </html>
 
 <style is:global>
-	:root {
-		/* Breakpoints */
-		--mobile: 480px;
-		--tablet: 768px;
-		--desktop: 1024px;
-		--wide: 1440px;
+/* ═══════════════════════════════════════════════════════════════════════
+   DESIGN SYSTEM — OURA & CO.
+   ───────────────────────────────────────────────────────────────────────
+   Breakpoints  │ 3120 · 2560 · 1920 · 1440 · 1024 · 768 · 480 · 360
+   Grid         │ 12-col → 8-col (≤1024) → 4-col (≤768)
+   Spacing      │ 8px base scale (--s-*)
+   Typography   │ Fluid clamp() scale (--text-*)
+   Page padding │ --px (horizontal) · --py (section vertical)
+═══════════════════════════════════════════════════════════════════════ */
 
-		/* Spacing */
-		--space-xs: clamp(0.5rem, 2vw, 1rem);
-		--space-sm: clamp(1rem, 3vw, 1.5rem);
-		--space-md: clamp(1.5rem, 4vw, 2rem);
-		--space-lg: clamp(2rem, 6vw, 3rem);
-		--space-xl: clamp(3rem, 8vw, 4rem);
-	}
+:root {
+  /* ── 8px spacing scale ──────────────────────────────────────────── */
+  --s-1:  8px;
+  --s-2:  16px;
+  --s-3:  24px;
+  --s-4:  32px;
+  --s-5:  40px;
+  --s-6:  48px;
+  --s-7:  56px;
+  --s-8:  64px;
+  --s-10: 80px;
+  --s-12: 96px;
+  --s-16: 128px;
+  --s-20: 160px;
 
-	*, *::before, *::after {
-		box-sizing: border-box;
-		margin: 0;
-		padding: 0;
-	}
-	html {
-		font-size: 16px;
-		line-height: 1.5;
-	}
+  /* ── Grid system ────────────────────────────────────────────────── */
+  --cols:     12;        /* column count — overridden at breakpoints  */
+  --gutter:   28px;      /* column gap                                */
+  --grid-max: 1440px;    /* container max-width                       */
 
-	/* Responsive typography */
-	@media (max-width: 768px) {
-		html {
-			font-size: 14px;
-		}
-	}
+  /* ── Page padding ────────────────────────────────────────────────
+     --px  horizontal page-edge padding  (2rem desktop / 1rem mobile)
+     --py  section vertical breathing room
+  ─────────────────────────────────────────────────────────────────── */
+  --px: 2rem;
+  --py: 160px;
 
-	@media (max-width: 480px) {
-		html {
-			font-size: 12px;
-		}
-	}
+  /* ── Fluid type scale ───────────────────────────────────────────── */
+  --text-xs:   clamp(9px,  0.6vw,  11px);
+  --text-sm:   clamp(10px, 0.75vw, 13px);
+  --text-base: clamp(12px, 0.875vw,15px);
+  --text-md:   clamp(14px, 1.1vw,  18px);
+  --text-lg:   clamp(16px, 1.4vw,  22px);
+  --text-xl:   clamp(20px, 1.8vw,  30px);
+  --text-2xl:  clamp(28px, 3vw,    44px);
+  --text-3xl:  clamp(36px, 4.5vw,  66px);
+  --text-4xl:  clamp(48px, 6vw,    88px);
+  --text-5xl:  clamp(58px, 7.5vw, 116px);
+  --text-hero: clamp(72px, 10vw,  150px);
 
-	html.lenis, html.lenis body {
-		height: auto;
-	}
+  /* ── Touch targets ──────────────────────────────────────────────── */
+  --touch-min:  44px;
+  --touch-comp: 48px;
+}
 
-	.lenis.lenis-smooth {
-		scroll-behavior: auto !important;
-	}
+/* 3120px ─────────────────────────────────────────────────────────────── */
+@media (max-width: 3120px) {
+  :root { --py: 140px; --gutter: 36px; }
+}
 
-	.lenis.lenis-smooth [data-lenis-prevent] {
-		overscroll-behavior: contain;
-	}
+/* 2560px ─────────────────────────────────────────────────────────────── */
+@media (max-width: 2560px) {
+  :root { --py: 120px; --gutter: 32px; }
+}
 
-	.lenis.lenis-stopped {
-		overflow: hidden;
-	}
+/* 1920px ─────────────────────────────────────────────────────────────── */
+@media (max-width: 1920px) {
+  :root { --py: 104px; --gutter: 28px; }
+}
 
-	.lenis.lenis-scrolling iframe {
-		pointer-events: none;
-	}
-	html, body {
-		width: 100%;
-		height: 100%;
-		font-family: 'Geist', sans-serif;
-		background: #ede8e0;
-	}
+/* 1440px ─────────────────────────────────────────────────────────────── */
+@media (max-width: 1440px) {
+  :root { --py: 88px; --gutter: 24px; }
+}
 
-	/* Utility classes */
-	.sr-only {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		padding: 0;
-		margin: -1px;
-		overflow: hidden;
-		clip: rect(0, 0, 0, 0);
-		white-space: nowrap;
-		border: 0;
-	}
+/* 1024px ─────────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  :root { --py: 72px; --cols: 8; --gutter: 20px; }
+}
 
-	.container {
-		width: 100%;
-		max-width: 1440px;
-		margin: 0 auto;
-		padding: 0 var(--space-md);
-	}
+/* 768px — switch to 1rem horizontal padding ─────────────────────────── */
+@media (max-width: 768px) {
+  :root { --px: 1rem; --py: 56px; --cols: 4; --gutter: 16px; }
+}
 
-	@media (max-width: 768px) {
-		.container {
-			padding: 0 var(--space-sm);
-		}
-	}
+/* 480px ─────────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  :root { --py: 48px; --gutter: 12px; }
+}
+
+/* 360px ─────────────────────────────────────────────────────────────── */
+@media (max-width: 360px) {
+  :root { --py: 40px; --gutter: 8px; }
+}
+
+/* ── CSS Reset ──────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  font-family: 'Geist', sans-serif;
+  background: #ede8e0;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.5;
+  scroll-behavior: smooth;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button, a {
+  cursor: pointer;
+}
+
+/* Minimum touch target size for interactive elements */
+button,
+[role="button"],
+a {
+  min-height: var(--touch-min);
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Restore block display where full-height isn't needed */
+a:not(.nav-logo):not(.nav-cta):not(.works-link):not(.contact-detail-link):not(.mm-nav-item) {
+  min-height: unset;
+  display: revert;
+}
+
+/* ── Lenis smooth scroll ────────────────────────────────────────────── */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* ── Grid utility ───────────────────────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  gap: var(--gutter);
+  width: 100%;
+}
+
+/* Column spans */
+.col-1  { grid-column: span 1; }
+.col-2  { grid-column: span 2; }
+.col-3  { grid-column: span 3; }
+.col-4  { grid-column: span 4; }
+.col-5  { grid-column: span 5; }
+.col-6  { grid-column: span 6; }
+.col-7  { grid-column: span 7; }
+.col-8  { grid-column: span 8; }
+.col-9  { grid-column: span 9; }
+.col-10 { grid-column: span 10; }
+.col-11 { grid-column: span 11; }
+.col-12 { grid-column: span 12; }
+.col-full { grid-column: 1 / -1; }
+
+/* Progressive stacking: 4-col tablet */
+@media (max-width: 768px) {
+  .col-1, .col-2 { grid-column: span 2; }
+  .col-3, .col-4 { grid-column: span 4; }
+  .col-5, .col-6,
+  .col-7, .col-8,
+  .col-9, .col-10,
+  .col-11, .col-12 { grid-column: 1 / -1; }
+}
+
+/* Full-stack on mobile */
+@media (max-width: 480px) {
+  .col-1, .col-2, .col-3, .col-4,
+  .col-5, .col-6, .col-7, .col-8,
+  .col-9, .col-10, .col-11, .col-12 { grid-column: 1 / -1; }
+}
+
+/* ── Container ──────────────────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: var(--grid-max);
+  margin-inline: auto;
+  padding-inline: var(--px);
+}
+
+/* ── Accessibility ──────────────────────────────────────────────────── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Dev grid overlay (press G to toggle) ───────────────────────────── */
+#grid-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99998;
+  pointer-events: none;
+  padding-inline: var(--px);
+  grid-template-columns: repeat(var(--cols), 1fr);
+  gap: var(--gutter);
+}
+
+#grid-overlay.is-visible {
+  display: grid;
+}
+
+#grid-overlay > span {
+  background: rgba(255, 30, 90, 0.07);
+  border-inline: 1px solid rgba(255, 30, 90, 0.2);
+  height: 100%;
+}
+
+#grid-badge {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  translate: -50% 0;
+  z-index: 99999;
+  background: rgba(10, 8, 6, 0.82);
+  backdrop-filter: blur(6px);
+  color: rgba(255,255,255,0.9);
+  font-family: 'Geist', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 4px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  white-space: nowrap;
+}
+
+#grid-badge.show {
+  opacity: 1;
+}
 </style>
 
 <script>
@@ -117,7 +303,6 @@ import '@fontsource/geist/700.css';
 
 	const lenis = new Lenis({
 		smoothWheel: true,
-		smoothTouch: false,
 		touchMultiplier: 2,
 		infinite: false,
 	});
@@ -128,4 +313,43 @@ import '@fontsource/geist/700.css';
 	}
 
 	requestAnimationFrame(raf);
+</script>
+
+<script>
+	// ── Dev grid overlay — press G to toggle ───────────────────────────
+	(function () {
+		const COLS = 12; // max column count; CSS var(--cols) handles responsive display
+
+		// Build overlay with 12 column spans
+		const overlay = document.createElement('div');
+		overlay.id = 'grid-overlay';
+		overlay.setAttribute('aria-hidden', 'true');
+		overlay.innerHTML = Array.from({ length: COLS }, () => '<span></span>').join('');
+		document.body.appendChild(overlay);
+
+		// Toast badge
+		const badge = document.createElement('div');
+		badge.id = 'grid-badge';
+		document.body.appendChild(badge);
+
+		let timer: ReturnType<typeof setTimeout> | null = null;
+
+		function flash(msg: string) {
+			badge.textContent = msg;
+			badge.classList.add('show');
+			if (timer) clearTimeout(timer);
+			timer = setTimeout(() => badge.classList.remove('show'), 2000);
+		}
+
+		document.addEventListener('keydown', (e: KeyboardEvent) => {
+			// Press G (or Shift+G) — skip if typing in a field
+			if (e.key !== 'g' && e.key !== 'G') return;
+			if (e.ctrlKey || e.metaKey || e.altKey) return;
+			const tag = (document.activeElement as HTMLElement)?.tagName ?? '';
+			if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+
+			const on = overlay.classList.toggle('is-visible');
+			flash(on ? 'Grid on  ·  G to hide' : 'Grid off');
+		});
+	})();
 </script>

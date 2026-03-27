@@ -1,0 +1,381 @@
+.gallery-section {
+  --text:   #1a1714;
+  --bg:     #ffffff;
+  --border: rgba(26, 23, 20, 0.10);
+  --muted:  rgba(26, 23, 20, 0.45);
+  --ease:   cubic-bezier(0.22, 1, 0.36, 1);
+
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  overflow: hidden;
+  contain: layout style paint;
+  padding-bottom: 2rem;
+}
+
+/* ── Main body ── */
+.gallery-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  padding: 2rem var(--px);
+  gap: 56px;
+}
+
+/* ── Left panel ── */
+.gallery-left {
+  width: 38%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.gallery-desc {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding-bottom: 24px;
+}
+
+.gallery-desc p {
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--text);
+  font-weight: 400;
+  max-width: 34ch;
+  text-align: left;
+}
+
+.gallery-left-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.gallery-counter {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.gallery-title {
+  font-size: clamp(36px, 4.8vw, 74px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  color: var(--text);
+  text-transform: uppercase;
+}
+
+/* ── Right panel ── */
+.gallery-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 0;
+  min-height: 0;
+}
+
+.gallery-img-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background: #e2dbd2;
+  max-width: 460px;
+  width: 100%;
+}
+
+.gallery-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.65s var(--ease);
+  pointer-events: none;
+  user-select: none;
+  will-change: opacity;
+}
+
+.gallery-img.is-active {
+  opacity: 1;
+}
+
+.gallery-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 36px;
+  max-width: 460px;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.gallery-caption-num,
+.gallery-caption-name {
+  font-size: 10px;
+  letter-spacing: 0.10em;
+  color: var(--muted);
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+/* ── Thumbnail strip ── */
+.gallery-strip {
+  height: 120px;
+  width: 100%;
+  display: flex;
+  flex-shrink: 0;
+  border-top: 1px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 0;
+  gap: 0;
+}
+
+.gallery-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-thumb {
+  flex: 1;
+  min-width: 72px;
+  min-height: 44px; /* touch target */
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  gap: 6px;
+}
+
+.thumb-num {
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: var(--text);
+  font-weight: 400;
+  line-height: 1;
+  text-align: left;
+  flex-shrink: 0;
+}
+
+.thumb-img-wrap {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.thumb-img-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.5);
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.gallery-thumb.is-active .thumb-img-wrap::after,
+.gallery-thumb:hover .thumb-img-wrap::after {
+  opacity: 0;
+}
+
+.thumb-img-wrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── 1440px ── */
+@media (max-width: 1440px) {
+  .gallery-body {
+    padding: 2rem var(--px);
+    gap: 48px;
+  }
+}
+
+/* ── 1024px ── */
+@media (max-width: 1024px) {
+  .gallery-body {
+    padding: 44px var(--px) 24px;
+    gap: 40px;
+  }
+
+  .gallery-left {
+    width: 40%;
+  }
+
+  .gallery-desc p {
+    font-size: 12px;
+  }
+}
+
+/* ── 768px ── */
+@media (max-width: 768px) {
+  .gallery-section {
+    height: auto;
+    overflow: visible;
+    contain: none;
+    padding-bottom: 0;
+  }
+
+  .gallery-body {
+    flex-direction: column;
+    flex: none;
+    padding: 32px var(--px) 20px;
+    gap: 24px;
+  }
+
+  .gallery-left {
+    width: 100%;
+    min-height: unset;
+  }
+
+  .gallery-desc {
+    padding-bottom: 12px;
+  }
+
+  .gallery-desc p {
+    max-width: 100%;
+    font-size: 12px;
+  }
+
+  .gallery-title {
+    font-size: clamp(28px, 8vw, 52px);
+  }
+
+  .gallery-right {
+    flex: none;
+    width: 100%;
+    height: 75vw;
+    min-height: 280px;
+    align-items: stretch;
+  }
+
+  .gallery-img-wrap,
+  .gallery-caption {
+    max-width: 100%;
+  }
+
+  .gallery-strip {
+    height: 100px;
+  }
+
+  .gallery-thumb {
+    min-width: 60px;
+    padding-top: 8px;
+  }
+}
+
+/* ── 480px ── */
+@media (max-width: 480px) {
+  .gallery-section {
+    padding: 0 0 2rem 0;
+  }
+
+  .gallery-body {
+    padding: 28px var(--px) 16px;
+    gap: 18px;
+  }
+
+  .gallery-desc p {
+    font-size: 11px;
+  }
+
+  .gallery-title {
+    font-size: clamp(24px, 10vw, 42px);
+  }
+
+  .gallery-right {
+    height: 100vw;
+    min-height: 260px;
+  }
+
+  .gallery-strip {
+    height: 80px;
+  }
+
+  .gallery-thumb {
+    min-width: 50px;
+    padding-top: 6px;
+    gap: 4px;
+  }
+
+  .thumb-num {
+    font-size: 8px;
+  }
+}
+
+/* ── 360px ── */
+@media (max-width: 360px) {
+  .gallery-section {
+    padding-bottom: 1rem;
+  }
+
+  .gallery-body {
+    padding: 24px var(--px) 14px;
+    gap: 14px;
+  }
+
+  .gallery-desc p {
+    font-size: 10px;
+    line-height: 1.65;
+  }
+
+  .gallery-counter {
+    font-size: 9px;
+  }
+
+  .gallery-title {
+    font-size: clamp(20px, 12vw, 36px);
+  }
+
+  .gallery-right {
+    height: 100vw;
+    min-height: 240px;
+  }
+
+  .gallery-strip {
+    height: 68px;
+  }
+
+  .gallery-thumb {
+    min-width: 44px;
+    padding-top: 5px;
+    gap: 3px;
+  }
+
+  .thumb-num {
+    font-size: 7px;
+  }
+
+  .gallery-caption {
+    height: 32px;
+  }
+
+  .gallery-caption-num,
+  .gallery-caption-name {
+    font-size: 8px;
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .gallery-img {
+    transition: none;
+  }
+  .thumb-img-wrap::after {
+    transition: none;
+  }
+}

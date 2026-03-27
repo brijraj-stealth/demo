@@ -1,16 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
-import Works from '../components/Works.astro';
-import Contact from '../components/Contact.astro';
+import GalleryReact from '../components/Gallery.tsx';
+import WorksReact from '../components/Works.tsx';
+import ContactReact from '../components/Contact.tsx';
+import Process from '../components/Process.astro';
 ---
 
 <Layout>
   <Hero />
-  <Works />
-  <Contact />
+  <WorksReact client:load />
+  <ContactReact client:load />
+  <GalleryReact client:load />
+  <Process />
 </Layout>
-
-<style>
-  /* No additional styles needed - let Lenis handle smooth scrolling */
-</style>

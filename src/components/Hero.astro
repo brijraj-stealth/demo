@@ -235,7 +235,7 @@ const {
 .hero-content {
   position: absolute;
   bottom: 36px;
-  left: 44px;
+  left: var(--px);
   z-index: var(--z-content);
   opacity: 0;
   /* delay matches .navbar animation in Navbar.astro (3.2s) */
@@ -263,7 +263,7 @@ const {
 /* ── Scroll hint ── */
 .scroll-hint {
   position: absolute;
-  right: 44px;
+  right: var(--px);
   bottom: 36px;
   z-index: var(--z-content);
   opacity: 0;
@@ -296,9 +296,7 @@ const {
   }
 
   .hero-content {
-    right: 24px;
     bottom: 24px;
-    left: 24px;
   }
 
   .eyebrow {
@@ -312,7 +310,6 @@ const {
   }
 
   .scroll-hint {
-    right: 24px;
     bottom: 24px;
     font-size: 8px;
   }
@@ -340,9 +337,7 @@ const {
   }
 
   .hero-content {
-    right: 20px;
     bottom: 20px;
-    left: 20px;
   }
 
   .eyebrow {
@@ -355,9 +350,43 @@ const {
   }
 
   .scroll-hint {
-    right: 20px;
     bottom: 20px;
     font-size: 7px;
+  }
+}
+
+@media (max-width: 360px) {
+  .loader-inner {
+    gap: 10px;
+  }
+
+  .loader-logo {
+    font-size: 11px;
+  }
+
+  .loader-track {
+    width: 88px;
+  }
+
+  .loader-label {
+    font-size: 6px;
+  }
+
+  .hero-content {
+    bottom: 16px;
+  }
+
+  .eyebrow {
+    font-size: 8px;
+    margin-bottom: 5px;
+  }
+
+  .title {
+    font-size: clamp(30px, 15vw, 48px);
+  }
+
+  .scroll-hint {
+    display: none;
   }
 }
 
